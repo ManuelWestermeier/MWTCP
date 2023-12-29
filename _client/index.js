@@ -195,7 +195,7 @@ class Client {
 
 }
 
-exports.Client = Client;
+module.exports = Client;
 
 process.on("uncaughtException", err => {
     error(err)

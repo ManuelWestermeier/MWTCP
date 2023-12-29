@@ -39,10 +39,6 @@ class Client {
             this.onend()
         })
 
-        this.#rawSocket.on("ready", () => {
-            this.onopen()
-        })
-
         this.#rawSocket.on("data", chunk => {
             this.#onmessage(chunk)
         })
@@ -186,7 +182,6 @@ class Client {
     //Other Handlers
 
     onclose() { }
-    onopen() { }
     onerror() { }
     onend() { }
 
@@ -195,8 +190,8 @@ class Client {
 exports.Client = Client;
 exports.createServer = ({ port }, handler) =>
     createServer(socket =>
-        handler(new Client(socket))
+        handler(new Client())
     ).listen(port || 2882)
 
 
-process.on("uncaughtException", err => { console.error })
+process.on("uncaughtException", err => { console.error(err) })
