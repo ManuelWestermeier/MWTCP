@@ -49,7 +49,7 @@ class Client {
 
     onSay(key, handler) {
 
-        if(!this.#obj.on.say[key])
+        if (!this.#obj.on.say[key])
             this.#obj.on.say[key] = [handler];
         else this.#obj.on.say[key].push(handler)
 
@@ -189,13 +189,13 @@ class Client {
 
 }
 
-exports.Client = Client;
-
 function defaultHandler(client = new Client()) { }
+
 exports.Client = Client;
 exports.createServer = (port, handler = defaultHandler) =>
     createServer(socket =>
-        handler(new Client())
+        handler(new Client(socket))
     ).listen(port || 2882)
+
 
 process.on("uncaughtException", err => { console.error(err) })
