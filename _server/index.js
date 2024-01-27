@@ -49,7 +49,9 @@ class Client {
 
     onSay(key, handler) {
 
-        this.#obj.on.say[key] = handler;
+        if(!this.#obj.on.say[key])
+            this.#obj.on.say[key] = [handler];
+        else this.#obj.on.say[key].push(handler)
 
     }
 
