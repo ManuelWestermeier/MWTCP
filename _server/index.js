@@ -190,10 +190,12 @@ class Client {
 }
 
 exports.Client = Client;
-exports.createServer = ({ port }, handler) =>
+
+function defaultHandler(client = new Client()) { }
+exports.Client = Client;
+exports.createServer = (port, handler = defaultHandler) =>
     createServer(socket =>
         handler(new Client())
     ).listen(port || 2882)
-
 
 process.on("uncaughtException", err => { console.error(err) })
